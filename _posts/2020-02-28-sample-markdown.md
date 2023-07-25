@@ -10,30 +10,27 @@ Intro-Project Ceti and Basic Concepts.
 **Here is some bold text**
 
 ## Detection
-To collect data about the whales one has properly distinguish whale sounds from the other ocean of sounds you get underwater.  The program taking care of this crucial first step is Orca spot
+To collect data about the whales one has properly distinguish whale sounds from the other ocean of sounds you get underwater.  The program taking care of this crucial first step is **Orca Spot**
 
 
 ### Orca-Spot
-#### ORCA-SPOT is an automatic killer whale sound detection toolkit that uses deep learning techniques, specifically convolutional neural networks (CNNs), to analyze large bioacoustic datasets:In this study, deep neural networks were trained on 11,509 killer whale (Orcinus orca) signals and 34,848 noise segments. The resulting toolkit ORCA-SPOT was tested on a large-scale bioacoustic repository – the Orchive – comprising roughly 19,000 hours of killer whale underwater recordings.
-ORCA-SPOT is a specific architecture built upon the principles of a ResNet. 
+#### ORCA-SPOT is an automatic killer whale sound detection toolkit that uses deep learning techniques, specifically convolutional neural networks (CNNs), to analyze large bioacoustic datasets
+ORCA-SPOT architecture is built upon the principles of a ResNet. 
 ResNet is a form of convolutional neural network used primarily for image processing.
-The model was proposed in 2015 by Kaiming He and his team at Microsoft Research in a paper titled "Deep Residual Learning for Image Recognition".
-ResNet18: This is the smallest and simplest among the ResNet variants evaluated in the experiment. It proved to be a strong competitor due to its speed and efficiency. The ResNet18 architecture's training and inference times were the shortest, making it a favorable option where real-time results are crucial. Its accuracy was only about 0.5% less on average compared to the more complex ResNet50. 
-However, it modifies the original ResNet design in specific ways to better handle its task of distinguishing killer whale sounds from noise. Key modifications include:
+The developers chose ResNet 18 as a base design for the Orca Spot. 
 
-In traditional ResNet architecture, the max-pooling layer with a stride of 2 would cause a loss of resolution early in the network, which is disadvantageous for handling high-frequency subtle killer whale signals. ORCA-SPOT circumvents this by keeping the resolution as high as possible for as long as possible.
+ResNet18 is the smallest and simplest among the ResNet variants. It proved to be a strong competitor due to its speed and efficiency. The ResNet18 architecture's training and inference times were the shortest, making it a favorable option where real-time results are crucial. It can process 45-minute Orchive tape in 2 minutes Its accuracy was only about 0.5% less on average compared to the more complex ResNet50. 
 
-The output from the global average pooling layer is connected to a fully connected layer with 512 neurons. This layer then projects its output onto two classes: a standard approach for binary classification problems in machine learnin "killer whale" and "noise", providing the final decision of the model.
+The developers of Orca-Spot modified the original ResNet design in specific ways to better handle its task of distinguishing killer whale sounds from noise. 
+For example, in traditional ResNet architecture, the max-pooling layer with a stride of 2 would cause a loss of resolution early in the network, which is disadvantageous for handling high-frequency subtle killer whale signals. ORCA-SPOT circumvents this by keeping the resolution as high as possible for as long as possible, by removing max-pooling in the first residual layer 
 
-Both ORCA-SPOT-1 (OS1) and ORCA-SPOT-2 (OS2) models are built upon the ResNet18 architecture and have identical network hyperparameters. They were trained on underwater sound recordings to classify segments as either "noise" or "killer whale". 
-OS1 implements a mean/standard deviation normalization approach, while OS2 applies dB-normalization within a fixed range of 0–1. The dB-normalization in OS2 was introduced to counteract issues with the standard deviation close to zero in silent recordings, which led to high false-positive rates in OS1. 
-OS1 uses the mean/standard deviation normalization approach, which is also called Standard Scaling or Z-score normalization. In this method, the mean is subtracted from individual data points and then divided by the standard deviation. The result is that the data is centered around 0 (mean is 0) with a unit standard deviation. 
-OS2 uses dB-normalization (decibel normalization) within a fixed range of 0-1. This means the audio signal's intensity (or loudness) is adjusted to fit within this specified range. In this case, the loudest signal is set as 1 and the quietest signal is set as 0, and everything else falls proportionally in-between. 
-The decision to switch to dB-normalization in OS2 was driven by a problem observed with the original approach in OS1. Specifically, when OS1 encountered silent or very quiet recordings, the standard deviation (a measure of how spread out the data is) would be very close to zero. When this happens, any small variation in the signal might be magnified by the normalization process, leading to extreme values and thereby higher false-positive rates, i.e., incorrectly identifying noise as "killer whale" sounds. 
+The second modification includes a global average pooling layer, in which output is connected to a fully connected layer with 512 neurons. This layer then projects its output onto two classes: "killer whale" and "noise", providing the final decision of the model.
+
+The Orca-Spot model applies dB-normalization within a fixed range of 0–1, as a mean/standard deviation normalization approach leads to high false-positive rates because when the standard deviation is close to zero in silent recordings, any small variation in the signal might be magnified by the normalization process, leading to extreme values and thereby higher false-positive rates.   
+Using dB-normalization (decibel normalization) the audio signal's intensity (or loudness) is adjusted to fit within this specified range. In this case, the loudest signal is set as 1 and the quietest signal is set as 0, and everything else falls proportionally in-between, which helps avoid creating extreme values even if the original recording is very quiet
+The performance of both models was evaluated using various metrics such as accuracy, true-positive-rate (TPR), false-positive-rate (FPR), positive-predictive-value (PPV), and Area Under the Curve (AUC)
  
-The dB-normalization method used by OS2 is more robust to this problem because it works within a fixed range (0–1), which helps avoid creating extreme values even if the original recording is very quiet. This makes it better suited for audio data with a wide dynamic range or recordings that have periods of silence 
-OS2 was trained on a larger dataset than OS1, containing an additional 6,109 noise samples from the AEOTD corpus, which were not part of the training set of OS1. This was done to improve the model's ability to generalize and to be more robust to noise. 
-The performance of both models was evaluated using various metrics such as accuracy, true-positive-rate (TPR), false-positive-rate (FPR), positive-predictive-value (PPV), and Area Under the Curve (AUC). OS2 performed slightly better than OS1, largely due to the changed normalization approach and additional noise samples 
+
  **result orca**
  
 
