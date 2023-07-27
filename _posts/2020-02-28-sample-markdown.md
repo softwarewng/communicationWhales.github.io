@@ -44,42 +44,34 @@ text
 ## Classification
 
 ### Orca-Feature
- It operates without the need for pre-existing labels or classifications on the data, making it more versatile for analyzing new, unlabeled data.
-The pipeline is less prone to human errors such as misclassifications, offering a more objective approach to data analysis.
-The pipeline is capable of robustly analyzing large volumes of data, an essential feature when dealing with extensive recordings of orca sounds.
-It eliminates the subjective aspect of human perception from the process, providing an unbiased analysis based on data alone.
- Despite being fully unsupervised, it achieved an accuracy of approximately 60.0% on a problem involving the classification of sounds into 12 categories.
-The depth of analysis provided by the pipeline enables the discovery of new and previously unknown sub-call types, expanding our understanding of orca communication
+The Orca-Feature is a deep learning model that can classify and differentiate between different call types. This model can operate without the need for pre-existing labels or classifications. The pipeline is less prone to human error, as it offers a more objective approach when it analyses the sound, which eliminates human bias.
+
+The structure of the model is somewhat close to the Orca-Spot and Orca-Clean. It is also a convolutional neural Network, that is based on ResNet18.
+ The model contains an under-complete autoencoder, that tries to accurately learn and reconstruct the input of the spectrogram image.
+The autoencoder contains an encoder path, where it uses an encoder function on the input sample to get a hidden representation. Then a decoder path with a decoder function to reconstruct the original input. So, the main goal is to generate an output, that is as close as possible to the original input and that process enables Feature learning, which allows the model to understand important characteristics of each spectrogram image.
+After the model learns the salient features of each spectrogram image, spectral clustering, an unsupervised learning technique, is used to group similar spectrogram images on the basis of features together.
+//add image.  
+To Properly evaluate unsupervised Clustering, a comparison has been made to the supervised Classification model. This model has the same structure as Orca-Spot. However, the output is connected to a 12-D layer, to classify between 12 different call types, that have been trained to recognize. 
+
+//confusion matrix
+The confusion matrix clearly visualizes the comparison between the supervised(left) and unsupervised(right). The supervised classification reached around 85% accuracy, whereas, for the unsupervised model, there were a lot of misclassifications and reached around 60% accuracy. Nevertheless, does it mean the model was wrong?
+
+//image
+In the image above in cluster c we have two different spectrogram images, which the clustering algorithm grouped together. However, humans classified them as different call types, specifically N07 and N09. This raises the question, did the humans misclassify them, or did the unsupervised clustering?  
 
 ### Orca-Slang
 #### Multi-Stage Semi-Supervised 
 ## Communication- Language Model
-in order to build the communication model we need to identify acoustic building blocks
-The first step is to identify the basic units or phonetics in the whale vocalizations. This involves looking for patterns and discrete units within the vocalizations, much like the vowels and consonants in human speech. The process is similar to the spoken term discovery in human speech processing and could be achieved by using unsupervised machine learning techniques. These techniques would identify and classify repeated patterns, hence, forming a basis for understanding the structure of the whale language. 
-After the basic units of the whale language are identified, the next step would be to determine the rules that govern the arrangement of these basic units, much like the syntax in human languages. This involves looking for higher-level hierarchical structures across the basic units. Techniques from natural language processing (NLP) for unsupervised grammar induction can be used here. These techniques can help in generating hypotheses about the grammatical structure of whale communication. 
- 
-Inferring Meaning: Once the structure of the whale language is understood, the next key question is to understand the semantics, i.e., what do these vocalizations mean. Techniques from machine learning and NLP can be used to associate meaning with sequences of clicks or codas. Models capable of learning mappings between sequences and continuous groundings can be useful here. 
- 
-Understanding Discourse and Social Communication: Sperm whale communication happens in a social context and understanding the discourse-level structure is crucial. This step would involve identifying rules that govern conversational turns, adaptations based on audience, and other such aspects. Predictive models capable of generating probable vocalizations given a conversation history and context could be built for this purpose. 
- 
-Redundancy and Fault Tolerance: Communication systems often have redundancy and fault tolerance mechanisms built-in to counter imperfections. Identifying these in sperm whale communication would require distinguishing variations due to redundancy from dialectal and individual variations. 
- 
-Language Acquisition: Understanding how young whales learn the language can provide further insights into the structure and function of the language. Continuous data acquisition on calf-mother pairs could provide insights into the order of acquisition of different aspects of the language. 
- 
-The complexity of the task necessitates the use of a combination of unsupervised learning techniques, deep learning models, NLP techniques, and methods for grammar induction, among others. The success of the task would largely depend on the availability of large-scale bioacoustic data and careful interpretation of the models' output 
+In order to build Communication-Language Model, acoustic building blocks need to be identified. This includes recognizing basic units or phonetics in the whale vocalizations, by looking for patterns in their vocalizations, much like vowels and consonants in human speech. 
+Moreover, we need to identify the grammatical structure, like determining the rules that govern the arrangement of these basic units, much like the syntax in human languages. Furthermore, in order to prevent building a "whale-chat bot" that can communicate with sperm whales without our understanding, we need to link the behavioral date with the codas.
+As far as we know, a Language Model hasn't been implemented yet, however, a roadmap has been laid out. They intend to use unsupervised translation. An example here shows how it should work.
+//animation
+We have here two different languages. Each word produces multi-dimensional vector representations known as embeddings. When these embedding of different words are grouped together they create a geometrical shape. If the shape of these different languages is aligned, it means that they have the same meaning. With this unsupervised method, correlation can be established directly from the embeddings themselves without the need for supervision. But for this to work, we'll need a lot of **DATA**. Not just codas, but also behavioral data, .....  data. 
 
 
 
 
-![Crepe](https://beautifuljekyll.com/assets/img/crepe.jpg)
-
-It can also be centered!
-
-![Crepe](https://beautifuljekyll.com/assets/img/crepe.jpg){: .mx-auto.d-block :}
 
 
-## Local URLs in project sites {#local-urls}
-
-When hosting a *project site* on GitHub Pages (for example, `https://USERNAME.github.io/MyProject`), URLs that begin with `/` and refer to local files may not work correctly due to how the root URL (`/`) is interpreted by GitHub Pages. You can read more about it [in the FAQ](https://beautifuljekyll.com/faq/#links-in-project-page). To demonstrate the issue, the following local image will be broken **if your site is a project site:**
 
 
