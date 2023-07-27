@@ -21,7 +21,7 @@ The developers chose ResNet 18 as a base design for the Orca Spot.
 ![Experiment between different Variants of ResNet](https://communicationWhales.github.io/assets/img/Resultsorca-spot.png)
 
 ResNet18 is the smallest and simplest among the ResNet variants. It proved to be a strong competitor due to its speed and efficiency. The ResNet18 architecture's training and inference times were the shortest, making it a favorable option where real-time results are crucial. It can process 45-minute Orchive tape in 2 minutes Its accuracy was only about 0.5% less on average compared to the more complex ResNet50. 
-
+![](https://communicationWhales.github.io/assets/img/Orca-Spot.png)
 The developers of Orca-Spot modified the original ResNet design in specific ways to better handle its task of distinguishing killer whale sounds from noise. 
 For example, in traditional ResNet architecture, the max-pooling layer with a stride of 2 would cause a loss of resolution early in the network, which is disadvantageous for handling high-frequency subtle killer whale signals. ORCA-SPOT circumvents this by keeping the resolution as high as possible for as long as possible, by removing max-pooling in the first residual layer 
 
@@ -30,7 +30,7 @@ The second modification includes a global average pooling layer, in which output
 The Orca-Spot model applies dB-normalization within a fixed range of 0–1, as a mean/standard deviation normalization approach leads to high false-positive rates because when the standard deviation is close to zero in silent recordings, any small variation in the signal might be magnified by the normalization process, leading to extreme values and thereby higher false-positive rates.   
 Using dB-normalization (decibel normalization) the audio signal's intensity (or loudness) is adjusted to fit within this specified range. In this case, the loudest signal is set as 1 and the quietest signal is set as 0, and everything else falls proportionally in-between, which helps avoid creating extreme values even if the original recording is very quiet
 The performance of both models was evaluated using various metrics such as accuracy, true-positive-rate (TPR), false-positive-rate (FPR), positive-predictive-value (PPV), and Area Under the Curve (AUC)
- 
+ ![](https://communicationWhales.github.io/assets/img/results_2.png)
 
  **result orca**
  
@@ -51,13 +51,13 @@ The structure of the model is somewhat close to the Orca-Spot and Orca-Clean. It
  The model contains an under-complete autoencoder, that tries to accurately learn and reconstruct the input of the spectrogram image.
 The autoencoder contains an encoder path, where it uses an encoder function on the input sample to get a hidden representation. Then a decoder path with a decoder function to reconstruct the original input. So, the main goal is to generate an output, that is as close as possible to the original input and that process enables Feature learning, which allows the model to understand important characteristics of each spectrogram image.
 After the model learns the salient features of each spectrogram image, spectral clustering, an unsupervised learning technique, is used to group similar spectrogram images on the basis of features together.
-//add image.  
+![](https://communicationWhales.github.io/assets/img/Autoencoder.png)  
 To Properly evaluate unsupervised Clustering, a comparison has been made to the supervised Classification model. This model has the same structure as Orca-Spot. However, the output is connected to a 12-D layer, to classify between 12 different call types, that have been trained to recognize. 
 
-//confusion matrix
+![](https://communicationWhales.github.io/assets/img/matrix.png)
 The confusion matrix clearly visualizes the comparison between the supervised(left) and unsupervised(right). The supervised classification reached around 85% accuracy, whereas, for the unsupervised model, there were a lot of misclassifications and reached around 60% accuracy. Nevertheless, does it mean the model was wrong?
 
-//image
+ ![](https://communicationWhales.github.io/assets/img/classifications.png)
 In the image above in cluster c we have two different spectrogram images, which the clustering algorithm grouped together. However, humans classified them as different call types, specifically N07 and N09. This raises the question, did the humans misclassify them, or did the unsupervised clustering?  
 
 ### Orca-Slang
