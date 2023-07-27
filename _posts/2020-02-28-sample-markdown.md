@@ -18,7 +18,7 @@ To collect data about the whales one has properly distinguish whale sounds from 
 ORCA-SPOT architecture is built upon the principles of a ResNet. 
 ResNet is a form of convolutional neural network used primarily for image processing.
 The developers chose ResNet 18 as a base design for the Orca Spot. 
-![Experiment between different Variants of ResNet](https://communicationWhales.github.io/blob/master/assets/img/Resultsorca-spot.png)
+![Experiment between different Variants of ResNet](https://communicationWhales.github.io/assets/img/Resultsorca-spot.png)
 
 ResNet18 is the smallest and simplest among the ResNet variants. It proved to be a strong competitor due to its speed and efficiency. The ResNet18 architecture's training and inference times were the shortest, making it a favorable option where real-time results are crucial. It can process 45-minute Orchive tape in 2 minutes Its accuracy was only about 0.5% less on average compared to the more complex ResNet50. 
 
