@@ -7,17 +7,17 @@ comments: true
 
 Intro-Project Ceti and Basic Concepts.
 
-###Project CETI
+## Project CETI
 One of the leading  research groups trying to unravel the communication between whales and humans is Project CETI​. There are currently a couple of vessels in operation in Dominica conducting ongoing research via CETI’s custom-built bio-inspired equipment. Project CETI's "Core Whale Listening Stations" represent a paradigm shift in animal communication monitoring, constituting the most advanced system ever devised for such a purpose and capable of capturing massive amounts of data for AI. This research facility is located off the coast of Dominica for initial testing and should be fully operational this fall/winter.
 
-###Why whales?
-In many ways, whales behave similarly to human beings, which explains why they were chosen for this study. They have a complex form of communication, using echolocation pulse and clicks to converse.  Furthermore they have 26 types of "Codas", which can be compared to dialects in the human language. They live in pods and families and have different cultures for different groups. Furtthermore their high residency rate offers a possibility for gathering a lot of information and now using machine learning and deep learning raises the potential of creating a "chatbot" for interspecies communication.
+### Why whales?
+In many ways, whales behave similarly to human beings, which explains why they were chosen for this study. They have a complex form of communication, using echolocation pulse and clicks to converse.  Furthermore, they have 26 types of "Codas", which can be compared to dialects in the human language. They live in pods and families and have different cultures for different groups. Furtthermore their high residency rate offers a possibility for gathering a lot of information and now using machine learning and deep learning raises the potential of creating a "chatbot" for interspecies communication.
 
-###Study Design
+### Study Design
 The study is designed as follows:
-Firstly, the raw data is captured. This is done by capturing the audio using underwater microphones. It is also important to contextualize the audio which is done using drones and small gps trackers on the whales. and all this is being overseen by a watcher tower for a better latency in communication. 
-Secondly the data is cleaned and structured, which we will discuss later on in depth.
-Then the language is ectracted from the structured data. 
+Firstly, the raw data is captured. This is done by capturing the audio using underwater microphones. It is also important to contextualize the audio which is done using drones and small gps trackers on the whales. and all this is being overseen by a watcher tower for better latency in communication. 
+Secondly, the data is cleaned and structured, which we will discuss later on in depth.
+Then the language is extracted from the structured data. 
 Lastly and hopefully a sequence of codas should be synthesized and played back to the whales. 
 !!!! ADD IMAGE HERE STUDY DESIGN !!!!
 
