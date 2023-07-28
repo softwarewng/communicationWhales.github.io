@@ -73,6 +73,15 @@ Then synthetic and real-world underwater noises are added to challenge the denoi
 In order to allow the network to focus on important areas within the spectrogram a Binary Mask Generation model was used. 
 This process creates a 'mask' where it separates the audio into 'spectrally strong' and 'spectrally weak' signal regions for easier identification of useful areas in the spectrogram.
 
+#### Network Architecture
+The experiment uses a deep learning model for denoising that is based on the U-Net architecture. Although U-Net is a well-known architecture for image segmentation tasks, in this instance it has been customized for auditory information adaptation .
+The Contracting, Bottleneck, and Expansive layers make up the three components of the U-Net architecture.
+The Contracting (downsampling) path This route's goal is to preserve the image's context. It starts with a stack of convolutional layers—typically two—and then down samples using a max-pooling process. The number of feature channels typically doubles with each downsampling step as we proceed along this path, enabling the network to learn more intricate features. 
+The bottleneck layer is situated between the Expansive and Contracting route. The bottleneck layer serves as an extractor or summarizer of features.
+The primary function of the bottleneck layer is to extract the input data's most compact and abstract properties, then transfer this knowledge to the expanding path for use in the output reconstruction.
+The expansive layer (upsampling) then makes use of this context to localize—also known as localization—the object in the image. The expansive approach uses a stack of convolutional layers, followed by an upsampling that boosts resolution, and is almost a mirror image of the contracting path. 
+!!!! ADD IMAGE HERE U-NET !!!!
+
 
 ## Classification
 
@@ -92,10 +101,21 @@ To Properly evaluate unsupervised Clustering, a comparison has been made to the 
 The confusion matrix clearly visualizes the comparison between the supervised(left) and unsupervised(right). The supervised classification reached around 85% accuracy, whereas, for the unsupervised model, there were a lot of misclassifications and reached around 60% accuracy. Nevertheless, does it mean the model was wrong?
 
  ![](https://communicationWhales.github.io/assets/img/classifications.png)
-In the image above in cluster c we have two different spectrogram images, which the clustering algorithm grouped together. However, humans classified them as different call types, specifically N07 and N09. This raises the question, did the humans misclassify them, or did the unsupervised clustering?  
+In the image above in cluster C, we have two different spectrogram images, which the clustering algorithm grouped together. However, humans classified them as different call types, specifically N07 and N09. This raises the question, did the humans misclassify them, or did the unsupervised clustering?
 
 ### Orca-Slang
-#### Multi-Stage Semi-Supervised 
+ORCA-SLANG is a machine-driven, multi-stage, semi-supervised, deep learning framework for killer whale (Orcinus Orca) call type identification, designed for large-scale recognition of known call types and sub-call patterns and/or unlabeled vocalization categories.
+#### Model Design
+The Orca-Slang experimental setup uses a large database of audio samples called the ORCHIVE. This process occurs in four main steps:
+1. Segmentation with ORCA-SPOT as discussed before.
+2. Embedding and Enhancing with ORCA-CLEAN, where, the segmented recordings are enhanced, then 
+3. ORCA-FEATURE using a machine learning training process with specific parameters (batch-size, learning rate, etc.) and
+4. lastly Call Type Clustering and Classification with ORCA-TYPE and k-NN.
+This final step is a hybrid approach that involves both supervised and unsupervised learning. First, spectral clustering is performed on a random selection of 20,000 ORCA-SPOT segments, resulting in 200 clusters. Then, ORCA-TYPE is used to classify the content of all clusters to find those that belong to one of the nine trained call types.
+If more than 70% of a cluster is classified as a certain call type, it is grouped, summarized, and used to form a reference for the k-NN classification of all the remaining data excerpts. Clusters that don't meet the 70% purity threshold are put in a rejection class.This final step is then repeated 5 times, removing duplicates, to ascertain the actual number of unique and additional detected call types across all trials
+The collaboration with k-NN classification reduces computational overhead, data storage needs.
+
+
 ## Communication- Language Model
 In order to build Communication-Language Model, acoustic building blocks need to be identified. This includes recognizing basic units or phonetics in the whale vocalizations, by looking for patterns in their vocalizations, much like vowels and consonants in human speech. 
 Moreover, we need to identify the grammatical structure, like determining the rules that govern the arrangement of these basic units, much like the syntax in human languages. Furthermore, in order to prevent building a "whale-chat bot" that can communicate with sperm whales without our understanding, we need to link the behavioral date with the codas.
