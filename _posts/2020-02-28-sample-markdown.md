@@ -1,7 +1,7 @@
 ---
 layout: post
 title: AI and Deep Learning in Unraveling the Mysteries of Whale Communication
-tags: [test]
+tags: [whales, deep learning, inter-species communication]
 comments: true
 ---
 
@@ -13,7 +13,7 @@ One of the leading  research groups trying to unravel the communication between 
 ### Why whales?
 In many ways, whales behave similarly to human beings, which explains why they were chosen for this study. They have a complex form of communication, using echolocation pulse and clicks to converse.  Furthermore, they have 26 types of "Codas", which can be compared to dialects in the human language. They live in pods and families and have different cultures for different groups. Furthermore, their high residency rate offers a possibility for gathering a lot of information and now using machine learning and deep learning raises the potential of creating a "chatbot" for interspecies communication.
 
-### Study Design
+### [Study Design](https://www.sciencedirect.com/science/article/pii/S2589004222006642)
 The study is designed as follows:
 Firstly, the raw data is captured. This is done by capturing the audio using underwater microphones. It is also important to contextualize the audio which is done using drones and small GPS trackers on the whales. and all this is being overseen by a watcher tower for better latency in communication. 
 Secondly, the data is cleaned and structured, which we will discuss later on in depth.
@@ -28,7 +28,7 @@ As we do not currently have implemented models from Project Ceti themselves, we 
 To collect data about the whales one has properly to distinguish whale sounds from the other ocean of sounds you get underwater. The program taking care of this crucial first step is **Orca Spot**.
 
 
-### Orca-Spot
+### [Orca-Spot](https://www.nature.com/articles/s41598-019-47335-w)
 #### ORCA-SPOT is an automatic killer whale sound detection toolkit that uses deep learning techniques, specifically convolutional neural networks (CNNs), to analyze large bioacoustic datasets
 ORCA-SPOT architecture is built upon the principles of a ResNet. 
 ResNet is a form of convolutional neural network used primarily for image processing.
@@ -36,7 +36,7 @@ The developers chose ResNet 18 as a base design for the Orca Spot.
 ![Experiment between different Variants of ResNet](https://communicationWhales.github.io/assets/img/Resultsorca-spot.png)
 
 ResNet18 is the smallest and simplest among the ResNet variants. It proved to be a strong competitor due to its speed and efficiency. The ResNet18 architecture's training and inference times were the shortest, making it a favorable option where real-time results are crucial. It can process 45-minute Orchive tape in 2 minutes Its accuracy was only about 0.5% less on average compared to the more complex ResNet50. 
-Although ResNet34 has almost double the layers of Resnet18, it did not show any substantial improvement. Moreover, Resnet101 is the most complex among the ones tested, and did not provide a significant boost in accuracy compared to its counterparts. 
+Although ResNet34 has almost double the layers of Resnet18, it did not show any substantial improvement. Moreover, Resnet101 is the most complex among the ones tested and did not provide a significant boost in accuracy compared to its counterparts. 
 ##### Architecture
 ![](https://communicationWhales.github.io/assets/img/Orca-Spot.png)
 The developers of Orca-Spot modified the original ResNet design in specific ways to better handle its task of distinguishing killer whale sounds from noise. 
@@ -63,7 +63,7 @@ Using dB-normalization (decibel normalization) the audio signal's intensity (or 
 
 
 
-###  Orca-Clean
+###  [Orca-Clean](http://www.interspeech2020.org/uploadfile/pdf/Mon-3-3-4.pdf)
 Thus far in the study, one of the main challenges was the  underwater noise contamination i.e. boats ... affecting data interpretation and feature learning. That's where Orca-Clean comes in as a deep denoising network designed for denoising of killer whale underwater recordings. It doesn't require any clean ground truth samples.
 
 #### Preparation and training
@@ -90,7 +90,7 @@ Precision is the proportion of true positive results among all the positive resu
 
 ## Classification
 
-### Orca-Feature
+### [Orca-Feature](http://www5.informatik.uni-erlangen.de/Forschung/Publikationen/2019/Bergler19-DLF.pdf)
 The Orca-Feature is a deep learning model that can classify and differentiate between different call types. This model can operate without the need for pre-existing labels or classifications. The pipeline is less prone to human error, as it offers a more objective approach when it analyses the sound, which eliminates human bias.
 
 The structure of the model is somewhat close to the Orca-Spot and Orca-Clean. It is also a convolutional neural Network, that is based on ResNet18.
@@ -110,7 +110,7 @@ The confusion matrix clearly visualizes the comparison between the supervised(le
  ![](https://communicationWhales.github.io/assets/img/classifications.png)
 In the image above, for example in cluster C, we have two different spectrogram images, which the clustering algorithm grouped together, as they share the same features, thus viewing them as the same call type. However, humans classified them as different call types, specifically N07 and N09. This raises the question, did the humans misclassify them, or did the unsupervised clustering?
 
-### Orca-Slang
+### [Orca-Slang](https://www.researchgate.net/profile/Steven-Ness/publication/354220681_ORCA-SLANG_An_Automatic_Multi-Stage_Semi-Supervised_Deep_Learning_Framework_for_Large-Scale_Killer_Whale_Call_Type_Identification/links/62059b4e634ff774f4c1e9c8/ORCA-SLANG-An-Automatic-Multi-Stage-Semi-Supervised-Deep-Learning-Framework-for-Large-Scale-Killer-Whale-Call-Type-Identification.pdf)
 ORCA-SLANG is a machine-driven, multi-stage, semi-supervised, deep-learning framework for killer whale (Orcinus Orca) call type identification, designed for large-scale recognition of known call types and sub-call patterns and/or unlabeled vocalization categories.
 #### Model Design
 ![](https://communicationWhales.github.io/assets/img/slang.png)
@@ -123,7 +123,7 @@ This final step is a hybrid approach that involves both supervised and unsupervi
 If more than 70% of a cluster is classified as a certain call type, it is grouped, summarized, and used to form a reference for the k-NN classification of all the remaining data excerpts. Clusters that don't meet the 70% purity threshold are put in a rejection class. This final step is then repeated 5 times, removing duplicates, to ascertain the actual number of unique and additional detected call types across all trials
 The collaboration with k-NN classification reduces computational overhead and data storage needs.
 
-##### K-Nearest Neighbour Algorithm maybe delete??!?!?!
+##### [K-Nearest Neighbour Algorithm](https://www.ibm.com/topics/knn)
 The k-nearest neighbors algorithm, sometimes referred to as KNN or k-NN, is a supervised learning classifier that employs proximity to produce classifications or predictions about the grouping of a single data point. In this study, the algorithm is only used for classification. 
 A new data point is classified based on its similarity relative to all the existing data that has been stored. This means that by utilizing the K-NN method, fresh data can be quickly and accurately sorted into a suitable category.
 
@@ -131,12 +131,12 @@ A new data point is classified based on its similarity relative to all the exist
 
 
 
-## Communication- Language Model
+## [Communication- Language Model](https://www.sciencedirect.com/science/article/pii/S2589004222006642)
 In order to build Communication-Language Model, acoustic building blocks need to be identified. This includes recognizing basic units or phonetics in the whale vocalizations, by looking for patterns in their vocalizations, much like vowels and consonants in human speech. 
 Moreover, we need to identify the grammatical structure, like determining the rules that govern the arrangement of these basic units, much like the syntax in human languages. Furthermore, in order to prevent building a "whale-chat bot" that can communicate with sperm whales without our understanding, we need to link the behavioral date with the codas.
-As far as we know, a Language Model hasn't been implemented yet, however, a roadmap has been laid out. They intend to use unsupervised translation. An example here shows how it should work.
+As far as we know, a Language Model hasn't been implemented yet, however, a roadmap has been laid out. They intend to use unsupervised translation. An [example](https://www.youtube.com/watch?v=Qm02X0aE8uU&t=242) here shows how it should work.
 ![](https://communicationWhales.github.io/assets/img/document_5341304067555603485.gif)
-We have here two different languages. Each word produces multi-dimensional vector representations known as embeddings. When these embedding of different words are grouped together they create a geometrical shape. If the shape of these different languages is aligned, it means that they have the same meaning. With this unsupervised method, correlation can be established directly from the embeddings themselves without the need for supervision. But for this to work, we'll need a lot of **DATA**. Not just codas, but also behavioral, location, territorial.... etc data. 
+We have here two different languages. Each word produces multi-dimensional vector representations known as embeddings. When these embeddings of different words are grouped together(**sentence**), they create a geometrical shape. If the shape of these different languages is aligned, it means that they have the same meaning. With this unsupervised method, correlation can be established directly from the embeddings themselves without the need for supervision. But for this to work, we'll need a lot of **DATA**. Not just codas, but also behavioral, location, territorial.... etc data. 
 
 
 ## Conclusion
