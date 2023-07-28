@@ -59,9 +59,11 @@ The Orca-Feature is a deep learning model that can classify and differentiate be
 
 The structure of the model is somewhat close to the Orca-Spot and Orca-Clean. It is also a convolutional neural Network, that is based on ResNet18.
  The model contains an under-complete autoencoder, that tries to accurately learn and reconstruct the input of the spectrogram image.
-The autoencoder contains an encoder path, where it uses an encoder function on the input sample to get a hidden representation. Then a decoder path with a decoder function to reconstruct the original input. So, the main goal is to generate an output, that is as close as possible to the original input and that process enables Feature learning, which allows the model to understand important characteristics of each spectrogram image.
+ ![](https://communicationWhales.github.io/assets/img/Autoencoder.png "This image shows the results from the Autoencoder reconstructing the original image from various whale type calls")  
+The autoencoder contains an encoder path, where it uses an encoder function on the input sample to get a hidden representation. Then a decoder path with a decoder function to reconstruct the original input. So, the main goal is to generate an output, that is as close as possible to the original input and that process enables Feature learning, which allows the model to understand important characteristics of each spectrogram image. 
+![](https://communicationWhales.github.io/assets/img/archiauto.png)  
 After the model learns the salient features of each spectrogram image, spectral clustering, an unsupervised learning technique, is used to group similar spectrogram images on the basis of features together.
-![](https://communicationWhales.github.io/assets/img/Autoencoder.png "This image shows the results from the Autoencoder reconstructing the original image from various whale type calls")  
+
 To Properly evaluate unsupervised Clustering, a comparison has been made to the supervised Classification model. This model has the same structure as Orca-Spot. However, the output is connected to a 12-D layer, to classify between 12 different call types, that have been trained to recognize. 
 
 ![](https://communicationWhales.github.io/assets/img/matrix.png)
