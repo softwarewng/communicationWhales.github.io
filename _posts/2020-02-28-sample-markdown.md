@@ -5,10 +5,10 @@ tags: [test]
 comments: true
 ---
 
-Intro-Project Ceti and Basic Concepts.
 
-## Project CETI
-One of the leading  research groups trying to unravel the communication between whales and humans is Project CETI​. There are currently a couple of vessels in operation in Dominica conducting ongoing research via CETI’s custom-built bio-inspired equipment. Project CETI's "Core Whale Listening Stations" represent a paradigm shift in animal communication monitoring, constituting the most advanced system ever devised for such a purpose and capable of capturing massive amounts of data for AI. This research facility is located off the coast of Dominica for initial testing and should be fully operational this fall/winter.
+
+## [Project CETI](https://www.projectceti.org/)
+One of the leading  research groups trying to unravel the communication between whales and humans is Project CETI. There are currently a couple of vessels in operation in Dominica conducting ongoing research via CETI’s custom-built bio-inspired equipment. Project CETI's "Core Whale Listening Stations" represent a paradigm shift in animal communication monitoring, constituting the most advanced system ever devised for such a purpose and capable of capturing massive amounts of data for AI. This research facility is located off the coast of Dominica for initial testing and should be fully operational this fall/winter.
 
 ### Why whales?
 In many ways, whales behave similarly to human beings, which explains why they were chosen for this study. They have a complex form of communication, using echolocation pulse and clicks to converse.  Furthermore, they have 26 types of "Codas", which can be compared to dialects in the human language. They live in pods and families and have different cultures for different groups. Furthermore, their high residency rate offers a possibility for gathering a lot of information and now using machine learning and deep learning raises the potential of creating a "chatbot" for interspecies communication.
@@ -20,12 +20,12 @@ Secondly, the data is cleaned and structured, which we will discuss later on in 
 Then the language is extracted from the structured data. 
 Lastly and hopefully a sequence of codas should be synthesized and played back to the whales. 
 ![](https://communicationWhales.github.io/assets/img/studydesign.jpg)
+As we do not currently have implemented models from Project Ceti themselves, we will show similar deep-learning models, that should work the same way. 
 
 
-**Here is some bold text**
 
 ## Detection
-To collect data about the whales one has properly to distinguish whale sounds from the other ocean of sounds you get underwater.  The program taking care of this crucial first step is **Orca Spot**.
+To collect data about the whales one has properly to distinguish whale sounds from the other ocean of sounds you get underwater. The program taking care of this crucial first step is **Orca Spot**.
 
 
 ### Orca-Spot
@@ -51,9 +51,8 @@ The **Orca-Spot 2** model applies dB-normalization within a fixed range of 0–1
 Using dB-normalization (decibel normalization) the audio signal's intensity (or loudness) is adjusted to fit within this specified range. In this case, the loudest signal is set as 1 and the quietest signal is set as 0, and everything else falls proportionally in-between, which helps avoid creating extreme values even if the original recording is very quiet
 ##### Results
  ![](https://communicationWhales.github.io/assets/img/results_2.png)
-**Orca Spot 1** was tested on 19,056 audio clips: 16,646 segments true killer whale sounds 2,410 falsely classified. 
-**Orca Spot 2**  was tested on 19,211 audio clips: 17,451 segments true killer whale sounds
-1,760 segments falsely
+**Orca Spot 1** was tested on 19,056 audio clips in which 16,646 segments of true killer whale sounds were spotted and  2,410 were falsely classified. 
+**Orca Spot 2**  was tested on 19,211 audio clips: 17,451 segments of true killer whale sounds were spotted and 1,760 segments were falsely classified. 
 
 
 
@@ -97,9 +96,11 @@ The Orca-Feature is a deep learning model that can classify and differentiate be
 The structure of the model is somewhat close to the Orca-Spot and Orca-Clean. It is also a convolutional neural Network, that is based on ResNet18.
  The model contains an under-complete autoencoder, that tries to accurately learn and reconstruct the input of the spectrogram image.
  ![](https://communicationWhales.github.io/assets/img/Autoencoder.png "This image shows the results from the Autoencoder reconstructing the original image from various whale type calls")  
+ 
 The autoencoder contains an encoder path, where it uses an encoder function on the input sample to get a hidden representation. Then a decoder path with a decoder function to reconstruct the original input. So, the main goal is to generate an output, that is as close as possible to the original input and that process enables Feature learning, which allows the model to understand important characteristics of each spectrogram image. 
 ![](https://communicationWhales.github.io/assets/img/archiauto.PNG)  
-After the model learns the salient features of each spectrogram image, spectral clustering, an unsupervised learning technique, is used to group similar spectrogram images on the basis of features together.
+
+After the model learns the salient features of each spectrogram image, spectral clustering, an unsupervised learning technique, is used to group similar spectrogram images into 12 clusters on the basis of features together.
 
 To Properly evaluate unsupervised Clustering, a comparison has been made to the supervised Classification model. This model has the same structure as Orca-Spot. However, the output is connected to a 12-D layer, to classify between 12 different call types, that have been trained to recognize. 
 
@@ -107,7 +108,7 @@ To Properly evaluate unsupervised Clustering, a comparison has been made to the 
 The confusion matrix clearly visualizes the comparison between the supervised(left) and unsupervised(right). The supervised classification reached around 85% accuracy, whereas, for the unsupervised model, there were a lot of misclassifications and reached around 60% accuracy. Nevertheless, does it mean the model was wrong?
 
  ![](https://communicationWhales.github.io/assets/img/classifications.png)
-In the image above in cluster C, we have two different spectrogram images, which the clustering algorithm grouped together. However, humans classified them as different call types, specifically N07 and N09. This raises the question, did the humans misclassify them, or did the unsupervised clustering?
+In the image above, for example in cluster C, we have two different spectrogram images, which the clustering algorithm grouped together, as they share the same features, thus viewing them as the same call type. However, humans classified them as different call types, specifically N07 and N09. This raises the question, did the humans misclassify them, or did the unsupervised clustering?
 
 ### Orca-Slang
 ORCA-SLANG is a machine-driven, multi-stage, semi-supervised, deep-learning framework for killer whale (Orcinus Orca) call type identification, designed for large-scale recognition of known call types and sub-call patterns and/or unlabeled vocalization categories.
@@ -122,7 +123,7 @@ This final step is a hybrid approach that involves both supervised and unsupervi
 If more than 70% of a cluster is classified as a certain call type, it is grouped, summarized, and used to form a reference for the k-NN classification of all the remaining data excerpts. Clusters that don't meet the 70% purity threshold are put in a rejection class. This final step is then repeated 5 times, removing duplicates, to ascertain the actual number of unique and additional detected call types across all trials
 The collaboration with k-NN classification reduces computational overhead and data storage needs.
 
-##### K-Nearest Neighbour Algorithm
+##### K-Nearest Neighbour Algorithm maybe delete??!?!?!
 The k-nearest neighbors algorithm, sometimes referred to as KNN or k-NN, is a supervised learning classifier that employs proximity to produce classifications or predictions about the grouping of a single data point. In this study, the algorithm is only used for classification. 
 A new data point is classified based on its similarity relative to all the existing data that has been stored. This means that by utilizing the K-NN method, fresh data can be quickly and accurately sorted into a suitable category.
 
@@ -135,7 +136,7 @@ In order to build Communication-Language Model, acoustic building blocks need to
 Moreover, we need to identify the grammatical structure, like determining the rules that govern the arrangement of these basic units, much like the syntax in human languages. Furthermore, in order to prevent building a "whale-chat bot" that can communicate with sperm whales without our understanding, we need to link the behavioral date with the codas.
 As far as we know, a Language Model hasn't been implemented yet, however, a roadmap has been laid out. They intend to use unsupervised translation. An example here shows how it should work.
 ![](https://communicationWhales.github.io/assets/img/document_5341304067555603485.gif)
-We have here two different languages. Each word produces multi-dimensional vector representations known as embeddings. When these embedding of different words are grouped together they create a geometrical shape. If the shape of these different languages is aligned, it means that they have the same meaning. With this unsupervised method, correlation can be established directly from the embeddings themselves without the need for supervision. But for this to work, we'll need a lot of **DATA**. Not just codas, but also behavioral data, .....  data. 
+We have here two different languages. Each word produces multi-dimensional vector representations known as embeddings. When these embedding of different words are grouped together they create a geometrical shape. If the shape of these different languages is aligned, it means that they have the same meaning. With this unsupervised method, correlation can be established directly from the embeddings themselves without the need for supervision. But for this to work, we'll need a lot of **DATA**. Not just codas, but also behavioral, location, territorial.... etc data. 
 
 
 ## Conclusion
