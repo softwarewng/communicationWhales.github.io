@@ -10,7 +10,7 @@ Intro-Project Ceti and Basic Concepts.
 **Here is some bold text**
 
 ## Detection
-To collect data about the whales one has properly distinguish whale sounds from the other ocean of sounds you get underwater.  The program taking care of this crucial first step is **Orca Spot**
+To collect data about the whales one has properly to distinguish whale sounds from the other ocean of sounds you get underwater.  The program taking care of this crucial first step is **Orca Spot**.
 
 
 ### Orca-Spot
@@ -21,18 +21,28 @@ The developers chose ResNet 18 as a base design for the Orca Spot.
 ![Experiment between different Variants of ResNet](https://communicationWhales.github.io/assets/img/Resultsorca-spot.png)
 
 ResNet18 is the smallest and simplest among the ResNet variants. It proved to be a strong competitor due to its speed and efficiency. The ResNet18 architecture's training and inference times were the shortest, making it a favorable option where real-time results are crucial. It can process 45-minute Orchive tape in 2 minutes Its accuracy was only about 0.5% less on average compared to the more complex ResNet50. 
+Although ResNet34 has almost double the layers of Resnet18, it did not show any substantial improvement. Moreover, Resnet101 is the most complex among the ones tested, and did not provide a significant boost in accuracy compared to its counterparts. 
+##### Architecture
 ![](https://communicationWhales.github.io/assets/img/Orca-Spot.png)
 The developers of Orca-Spot modified the original ResNet design in specific ways to better handle its task of distinguishing killer whale sounds from noise. 
-For example, in traditional ResNet architecture, the max-pooling layer with a stride of 2 would cause a loss of resolution early in the network, which is disadvantageous for handling high-frequency subtle killer whale signals. ORCA-SPOT circumvents this by keeping the resolution as high as possible for as long as possible, by removing max-pooling in the first residual layer 
+For example, in traditional ResNet architecture, the max-pooling layer with a stride of 2 would cause a loss of resolution early in the network, which is disadvantageous for handling high-frequency subtle killer whale signals. ORCA-SPOT circumvents this by keeping the resolution as high as possible for as long as possible, by removing max-pooling in the first residual layer. 
 
 The second modification includes a global average pooling layer, in which output is connected to a fully connected layer with 512 neurons. This layer then projects its output onto two classes: "killer whale" and "noise", providing the final decision of the model.
+##### Training the model 
+In order to train the model, the audio clips were turned  into 44.1kHz mono wav-signal and then converted into power spectrograms. To increase the variety of data the model trains on, intensity, pitch, time, and noise augmentation, were randomly scaled between two fixed ranges.  
 
-The Orca-Spot model applies dB-normalization within a fixed range of 0–1, as a mean/standard deviation normalization approach leads to high false-positive rates because when the standard deviation is close to zero in silent recordings, any small variation in the signal might be magnified by the normalization process, leading to extreme values and thereby higher false-positive rates.   
+During the development and training of the Orca-Spot two models were created with different normalization approaches.
+The **Orca-Spot 2** model applies dB-normalization within a fixed range of 0–1, as a mean/standard deviation normalization approach in **Orca-Spot 1** leads to high false-positive rates because when the standard deviation is close to zero in silent recordings, any small variation in the signal might be magnified by the normalization process, leading to extreme values and thereby higher false-positive rates.   
 Using dB-normalization (decibel normalization) the audio signal's intensity (or loudness) is adjusted to fit within this specified range. In this case, the loudest signal is set as 1 and the quietest signal is set as 0, and everything else falls proportionally in-between, which helps avoid creating extreme values even if the original recording is very quiet
-The performance of both models was evaluated using various metrics such as accuracy, true-positive-rate (TPR), false-positive-rate (FPR), positive-predictive-value (PPV), and Area Under the Curve (AUC)
+##### Results
  ![](https://communicationWhales.github.io/assets/img/results_2.png)
+**Orca Spot 1** was tested on 19,056 audio clips: 16,646 segments true killer whale sounds 2,410 falsely classified. 
+**Orca Spot 2**  was tested on 19,211 audio clips: 17,451 segments true killer whale sounds
+1,760 segments falsely
 
- **result orca**
+
+
+
  
 
 
@@ -51,7 +61,7 @@ The structure of the model is somewhat close to the Orca-Spot and Orca-Clean. It
  The model contains an under-complete autoencoder, that tries to accurately learn and reconstruct the input of the spectrogram image.
 The autoencoder contains an encoder path, where it uses an encoder function on the input sample to get a hidden representation. Then a decoder path with a decoder function to reconstruct the original input. So, the main goal is to generate an output, that is as close as possible to the original input and that process enables Feature learning, which allows the model to understand important characteristics of each spectrogram image.
 After the model learns the salient features of each spectrogram image, spectral clustering, an unsupervised learning technique, is used to group similar spectrogram images on the basis of features together.
-![](https://communicationWhales.github.io/assets/img/Autoencoder.png)  
+![](https://communicationWhales.github.io/assets/img/Autoencoder.png "This image shows the results from the Autoencoder reconstructing the original image from various whale type calls")  
 To Properly evaluate unsupervised Clustering, a comparison has been made to the supervised Classification model. This model has the same structure as Orca-Spot. However, the output is connected to a 12-D layer, to classify between 12 different call types, that have been trained to recognize. 
 
 ![](https://communicationWhales.github.io/assets/img/matrix.png)
