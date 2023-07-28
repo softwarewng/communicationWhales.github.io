@@ -7,18 +7,19 @@ comments: true
 
 Intro-Project Ceti and Basic Concepts.
 
-#Project CETI
+###Project CETI
 One of the leading  research groups trying to unravel the communication between whales and humans is Project CETI​. There are currently a couple of vessels in operation in Dominica conducting ongoing research via CETI’s custom-built bio-inspired equipment. Project CETI's "Core Whale Listening Stations" represent a paradigm shift in animal communication monitoring, constituting the most advanced system ever devised for such a purpose and capable of capturing massive amounts of data for AI. This research facility is located off the coast of Dominica for initial testing and should be fully operational this fall/winter.
 
-#Why whales?
+###Why whales?
 In many ways, whales behave similarly to human beings, which explains why they were chosen for this study. They have a complex form of communication, using echolocation pulse and clicks to converse.  Furthermore they have 26 types of "Codas", which can be compared to dialects in the human language. They live in pods and families and have different cultures for different groups. Furtthermore their high residency rate offers a possibility for gathering a lot of information and now using machine learning and deep learning raises the potential of creating a "chatbot" for interspecies communication.
 
-#Study Design
+###Study Design
 The study is designed as follows:
 Firstly, the raw data is captured. This is done by capturing the audio using underwater microphones. It is also important to contextualize the audio which is done using drones and small gps trackers on the whales. and all this is being overseen by a watcher tower for a better latency in communication. 
 Secondly the data is cleaned and structured, which we will discuss later on in depth.
 Then the language is ectracted from the structured data. 
 Lastly and hopefully a sequence of codas should be synthesized and played back to the whales. 
+!!!! ADD IMAGE HERE STUDY DESIGN !!!!
 
 
 **Here is some bold text**
@@ -74,14 +75,17 @@ In order to allow the network to focus on important areas within the spectrogram
 This process creates a 'mask' where it separates the audio into 'spectrally strong' and 'spectrally weak' signal regions for easier identification of useful areas in the spectrogram.
 
 #### Network Architecture
-The experiment uses a deep learning model for denoising that is based on the U-Net architecture. Although U-Net is a well-known architecture for image segmentation tasks, in this instance it has been customized for auditory information adaptation .
+The experiment uses a deep learning model for denoising based on the U-Net architecture. Although U-Net is a well-known architecture for image segmentation tasks, in this instance, it has been customized for auditory information adaptation .
 The Contracting, Bottleneck, and Expansive layers make up the three components of the U-Net architecture.
-The Contracting (downsampling) path This route's goal is to preserve the image's context. It starts with a stack of convolutional layers—typically two—and then down samples using a max-pooling process. The number of feature channels typically doubles with each downsampling step as we proceed along this path, enabling the network to learn more intricate features. 
-The bottleneck layer is situated between the Expansive and Contracting route. The bottleneck layer serves as an extractor or summarizer of features.
-The primary function of the bottleneck layer is to extract the input data's most compact and abstract properties, then transfer this knowledge to the expanding path for use in the output reconstruction.
-The expansive layer (upsampling) then makes use of this context to localize—also known as localization—the object in the image. The expansive approach uses a stack of convolutional layers, followed by an upsampling that boosts resolution, and is almost a mirror image of the contracting path. 
+The Contracting (downsampling) path This route's goal is to preserve the image's context. It starts with a stack of convolutional layers—typically two—and then downsamples using a max-pooling process. The number of feature channels typically doubles with each downsampling step as we proceed along this path, enabling the network to learn more intricate features.
+The bottleneck layer is situated between the Expansive and Contracting routes. The bottleneck layer serves as an extractor or summarizer of features.
+The primary function of the bottleneck layer is to extract the input data's most compact and abstract properties and then transfer this knowledge to the expanding path for use in the output reconstruction.
+The expansive layer (upsampling) then makes use of this context to localize—also known as localization—the object in the image. The expansive approach uses a stack of convolutional layers, followed by an upsampling that boosts resolution, and is almost a mirror image of the contracting path.
 !!!! ADD IMAGE HERE U-NET !!!!
 
+#### Results
+The accuracy represents the overall correctness of the system in identifying true positives and true negatives in the dataset. In this case, the system performs slightly better without Orca Clean improving the 94.97% accuracy to 96.04%.
+Precision is the proportion of true positive results among all the positive results predicted by the system. A higher precision indicates a lower number of false positives. The difference in precision in this case was very minimal but significant enough to drop the false-positive-rate from 4.36% to 1.77% 
 
 ## Classification
 
@@ -115,16 +119,24 @@ This final step is a hybrid approach that involves both supervised and unsupervi
 If more than 70% of a cluster is classified as a certain call type, it is grouped, summarized, and used to form a reference for the k-NN classification of all the remaining data excerpts. Clusters that don't meet the 70% purity threshold are put in a rejection class.This final step is then repeated 5 times, removing duplicates, to ascertain the actual number of unique and additional detected call types across all trials
 The collaboration with k-NN classification reduces computational overhead, data storage needs.
 
+##### K-Nearest Neighbour Algorithm
+The k-nearest neighbors algorithm, sometimes referred to as KNN or k-NN, is a supervised learning classifier that employs proximity to produce classifications or predictions about the grouping of a single data point. In this study the algorithm is only used for classification. 
+A new data point is classified based on its similarity relative to all the existing data has been stored. This means that utilizing the K-NN method, fresh data can be quickly and accurately sorted into a suitable category.
+
+
+
+
 
 ## Communication- Language Model
 In order to build Communication-Language Model, acoustic building blocks need to be identified. This includes recognizing basic units or phonetics in the whale vocalizations, by looking for patterns in their vocalizations, much like vowels and consonants in human speech. 
 Moreover, we need to identify the grammatical structure, like determining the rules that govern the arrangement of these basic units, much like the syntax in human languages. Furthermore, in order to prevent building a "whale-chat bot" that can communicate with sperm whales without our understanding, we need to link the behavioral date with the codas.
 As far as we know, a Language Model hasn't been implemented yet, however, a roadmap has been laid out. They intend to use unsupervised translation. An example here shows how it should work.
-![](https://communicationWhales.github.io/assets/img/document_5341304067555603485.gif)
+//animation
 We have here two different languages. Each word produces multi-dimensional vector representations known as embeddings. When these embedding of different words are grouped together they create a geometrical shape. If the shape of these different languages is aligned, it means that they have the same meaning. With this unsupervised method, correlation can be established directly from the embeddings themselves without the need for supervision. But for this to work, we'll need a lot of **DATA**. Not just codas, but also behavioral data, .....  data. 
 
 
-
+## Coclusion
+After discussing the model of the study and observing the progress made one could conclude that the potential shown in this field seems to be promising. As fascinating and interesting as interspecies communication sounds there is still a lot of progress to be made. In theory one could say that teh goals are achieveable in the forseable future but in real life it never goes as planed. But what is known for sure that through this research we will obtain new knowledge, that if this goal is not met, the acquired information will be used in other fields that will benefit the scientific community.
 
 
 
