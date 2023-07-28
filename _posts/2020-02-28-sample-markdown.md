@@ -29,7 +29,7 @@ To collect data about the whales one has properly to distinguish whale sounds fr
 
 
 ### [Orca-Spot](https://www.nature.com/articles/s41598-019-47335-w)
-#### ORCA-SPOT is an automatic killer whale sound detection toolkit that uses deep learning techniques, specifically convolutional neural networks (CNNs), to analyze large bioacoustic datasets
+#### ORCA-SPOT uses deep learning techniques, specifically convolutional neural networks (CNNs), that manage the binary classification problem, Whale sound or noise
 ORCA-SPOT architecture is built upon the principles of a ResNet. 
 ResNet is a form of convolutional neural network used primarily for image processing.
 The developers chose ResNet 18 as a base design for the Orca Spot. 
@@ -42,13 +42,13 @@ Although ResNet34 has almost double the layers of Resnet18, it did not show any 
 The developers of Orca-Spot modified the original ResNet design in specific ways to better handle its task of distinguishing killer whale sounds from noise. 
 For example, in traditional ResNet architecture, the max-pooling layer with a stride of 2 would cause a loss of resolution early in the network, which is disadvantageous for handling high-frequency subtle killer whale signals. ORCA-SPOT circumvents this by keeping the resolution as high as possible for as long as possible, by removing max-pooling in the first residual layer. 
 
-The second modification includes a global average pooling layer, in which output is connected to a fully connected layer with 512 neurons. This layer then projects its output onto two classes: "killer whale" and "noise", providing the final decision of the model.
+The second modification includes a global average pooling layer, in which output is connected to a fully connected layer with 512 neurons. Following that, this layer projected its output onto the classifications "killer whale" and "noise," giving the model's final conclusion.
 ##### Training the model 
-In order to train the model, the audio clips were turned  into 44.1kHz mono wav-signal and then converted into power spectrograms. To increase the variety of data the model trains on, intensity, pitch, time, and noise augmentation, were randomly scaled between two fixed ranges.  
+In order to train the model, the audio clips were turned into 44.1kHz mono wav-signal and then converted into power spectrograms. To increase the variety of data the model trains on, intensity, pitch, time, and noise augmentation, were randomly scaled between two fixed ranges.  
 
 During the development and training of the Orca-Spot two models were created with different normalization approaches.
 The **Orca-Spot 2** model applies dB-normalization within a fixed range of 0–1, as a mean/standard deviation normalization approach in **Orca-Spot 1** leads to high false-positive rates because when the standard deviation is close to zero in silent recordings, any small variation in the signal might be magnified by the normalization process, leading to extreme values and thereby higher false-positive rates.   
-Using dB-normalization (decibel normalization) the audio signal's intensity (or loudness) is adjusted to fit within this specified range. In this case, the loudest signal is set as 1 and the quietest signal is set as 0, and everything else falls proportionally in-between, which helps avoid creating extreme values even if the original recording is very quiet
+Using dB-normalization (decibel normalization) the audio signal's intensity (or loudness) is adjusted to fit within this specified range. In this case, the loudest signal is set as 1 and the quietest signal is set as 0, and everything else falls proportionally in-between, which helps avoid creating extreme values even if the original recording is very quiet.
 ##### Results
  ![](https://communicationWhales.github.io/assets/img/results_2.png)
 **Orca Spot 1** was tested on 19,056 audio clips in which 16,646 segments of true killer whale sounds were spotted and  2,410 were falsely classified. 
