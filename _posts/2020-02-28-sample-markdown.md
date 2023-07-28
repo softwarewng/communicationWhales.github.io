@@ -7,6 +7,20 @@ comments: true
 
 Intro-Project Ceti and Basic Concepts.
 
+#Project CETI
+One of the leading  research groups trying to unravel the communication between whales and humans is Project CETI​. There are currently a couple of vessels in operation in Dominica conducting ongoing research via CETI’s custom-built bio-inspired equipment. Project CETI's "Core Whale Listening Stations" represent a paradigm shift in animal communication monitoring, constituting the most advanced system ever devised for such a purpose and capable of capturing massive amounts of data for AI. This research facility is located off the coast of Dominica for initial testing and should be fully operational this fall/winter.
+
+#Why whales?
+In many ways, whales behave similarly to human beings, which explains why they were chosen for this study. They have a complex form of communication, using echolocation pulse and clicks to converse.  Furthermore they have 26 types of "Codas", which can be compared to dialects in the human language. They live in pods and families and have different cultures for different groups. Furtthermore their high residency rate offers a possibility for gathering a lot of information and now using machine learning and deep learning raises the potential of creating a "chatbot" for interspecies communication.
+
+#Study Design
+The study is designed as follows:
+Firstly, the raw data is captured. This is done by capturing the audio using underwater microphones. It is also important to contextualize the audio which is done using drones and small gps trackers on the whales. and all this is being overseen by a watcher tower for a better latency in communication. 
+Secondly the data is cleaned and structured, which we will discuss later on in depth.
+Then the language is ectracted from the structured data. 
+Lastly and hopefully a sequence of codas should be synthesized and played back to the whales. 
+
+
 **Here is some bold text**
 
 ## Detection
@@ -50,7 +64,15 @@ Using dB-normalization (decibel normalization) the audio signal's intensity (or 
 
 
 ###  Orca-Clean
-text
+This far in in the study one of the main challenges was the  underwater noise contamination i.e. boats ... affecting data interpretation and feature learning. That's where Orca-Clean comes in as a deep denoiosing network designed for denoising of killer whale underwater recordings. It doesnt require any clean ground truth samples.
+
+#### Preperation and training
+Orca-Clean is prepared in a similiar way as ORCA SPOT.
+The first stage of preparation involves converting audio signals into a form suitable for the experiment.
+Then synthetic and real-world underwater noises are added to challenge the denoising model and train it for an improvement in future results.
+In order to allow the network to focus on important areas within the spectrogram a Binary Mask Generation model was used. 
+This process creates a 'mask' where it separates the audio into 'spectrally strong' and 'spectrally weak' signal regions for easier identification of useful areas in the spectrogram.
+
 
 ## Classification
 
