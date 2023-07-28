@@ -87,6 +87,8 @@ The expansive layer (upsampling) then makes use of this context to localize—
 The accuracy represents the overall correctness of the system in identifying true positives and true negatives in the dataset. In this case, the system performs slightly better without Orca Clean improving the 94.97% accuracy to 96.04%.
 Precision is the proportion of true positive results among all the positive results predicted by the system. A higher precision indicates a lower number of false positives. The difference in precision in this case was very minimal but significant enough to drop the false-positive-rate from 4.36% to 1.77% 
 
+!!!! ADD IMAGE HERE RESULTS LEFT !!!!
+
 ## Classification
 
 ### Orca-Feature
@@ -135,7 +137,7 @@ As far as we know, a Language Model hasn't been implemented yet, however, a road
 We have here two different languages. Each word produces multi-dimensional vector representations known as embeddings. When these embedding of different words are grouped together they create a geometrical shape. If the shape of these different languages is aligned, it means that they have the same meaning. With this unsupervised method, correlation can be established directly from the embeddings themselves without the need for supervision. But for this to work, we'll need a lot of **DATA**. Not just codas, but also behavioral data, .....  data. 
 
 
-## Coclusion
+## Conclusion
 After discussing the model of the study and observing the progress made one could conclude that the potential shown in this field seems to be promising. As fascinating and interesting as interspecies communication sounds there is still a lot of progress to be made. In theory one could say that teh goals are achieveable in the forseable future but in real life it never goes as planed. But what is known for sure that through this research we will obtain new knowledge, that if this goal is not met, the acquired information will be used in other fields that will benefit the scientific community.
 
 
