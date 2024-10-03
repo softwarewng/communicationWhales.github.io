@@ -19,7 +19,10 @@ author: Ahmed Rezk and Omar Aboulazm
 ###############################################
 
 navbar-links:
-  About Me: "aboutme"
+  About Me: "This website is dedicated to our research into the architecture and functionality of the LLMs used to achieve fluid communications between humans and whales.
+For Questions feel free to contact us:
+Ahmed Rezk - ahmedrezk111@hotmail.com
+Omar Aboulazm - omar_aboulazm@hotmail.com "
   Resources:
     - Beautiful Jekyll: "https://beautifuljekyll.com"
     - Learn markdown: "https://www.markdowntutorial.com/"
